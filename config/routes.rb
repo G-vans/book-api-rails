@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
   get '/external-books', to: 'book#external_books'
+  post '/books', to: 'book#create'
 end

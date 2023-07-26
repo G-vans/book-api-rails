@@ -24,4 +24,20 @@ class BookController < ApplicationController
             render json: { status_code: 404, status: 'not found', data: [] }
         end
     end
+
+    #Req 2 Create a book and save in db
+    def create
+        book = Book.new(book_params)
+
+        if book.save 
+            render json: {status_code: 201, status: 'success', data: { book: book } }
+        else
+            render json: {status_code: 400, status: 'bad request', errors: book.errors.full_messages }
+        end
+    end
+
+    private
+    def book_params
+        params.permit(:name, :isbn, :number_of_pages, :publisher, :country, :release_date, :authors => [])
+    end
 end
