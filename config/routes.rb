@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   get '/external-books', to: 'book#external_books'
   post '/books', to: 'book#create'
   get '/books', to: 'book#index'
+  delete '/books/id', to: 'book#destroy'
 end

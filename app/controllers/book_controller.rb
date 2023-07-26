@@ -42,6 +42,17 @@ class BookController < ApplicationController
         render json: {status_code: 200, status: 'success', data: books }
     end
 
+    #Delete: destroy a specific book
+    def destroy
+        book = Book.find_by(id: params[:id])
+        if book
+            book.destroy
+            render json: {status_code: 204, status: 'success', message: "The book '#{book.name}' was deleted successfully", data: {}}
+        else
+            render json: {status_code: 404, status: 'not found', data: {}}
+        end
+    end
+
     private
     def book_params
         params.permit(:name, :isbn, :number_of_pages, :publisher, :country, :release_date, :authors => [])
