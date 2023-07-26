@@ -52,6 +52,20 @@ class BookController < ApplicationController
         end
     end
 
+    #Update a specific book
+    def update
+        book = Book.find_by(id: params[:id])
+        if book
+          if book.update(book_params)
+            render json: { status_code: 200, status: 'success', message: "The book #{book.name} was updated successfully", data: book }
+          else
+            render json: { status_code: 400, status: 'bad request', errors: book.errors.full_messages }
+          end
+        else
+          render json: { status_code: 404, status: 'not found', data: {} }
+        end
+    end
+
     #Delete: destroy a specific book
     def destroy
         book = Book.find_by(id: params[:id])
