@@ -42,6 +42,16 @@ class BookController < ApplicationController
         render json: {status_code: 200, status: 'success', data: books }
     end
 
+    #Show specific book by id
+    def show
+        book = Book.find_by(id: params[:id])
+        if book
+          render json: { status_code: 200, status: 'success', data: book }
+        else
+          render json: { status_code: 404, status: 'not found', data: {} }
+        end
+    end
+
     #Delete: destroy a specific book
     def destroy
         book = Book.find_by(id: params[:id])
