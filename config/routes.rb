@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   # root "articles#index"
   get '/external-books', to: 'book#external_books'
   post '/books', to: 'book#create'
+  get '/books', to: 'book#index'
 end

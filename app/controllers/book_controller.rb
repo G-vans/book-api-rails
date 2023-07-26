@@ -36,6 +36,12 @@ class BookController < ApplicationController
         end
     end
 
+    #Read: return a list of all books saved
+    def index
+        books = Book.all
+        render json: {status_code: 200, status: 'success', data: books }
+    end
+
     private
     def book_params
         params.permit(:name, :isbn, :number_of_pages, :publisher, :country, :release_date, :authors => [])
