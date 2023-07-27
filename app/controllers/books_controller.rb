@@ -77,6 +77,25 @@ class BooksController < ApplicationController
         end
     end
 
+    #Implement search
+    def search
+      name = params[:name]
+      country = params[:country]
+      publisher = params[:publisher]
+      release_date = params[:release_date]
+
+      books = Book.where("name LIKE ?", "%#{name}%") if name.present?
+      books = books.where(country: country) if country.present?
+      books = books.where(publisher: publisher) if publisher.present?
+      books = books.where(release_date: release_date) if release_date.present?
+
+      if books.present?
+        render json: { status_code: 200, status: 'success', data: books }
+      else
+        render json: { status_code: 404, status: 'not found', data: [] }
+      end
+    end
+
     private
     def book_params
         params.permit(:name, :isbn, :number_of_pages, :publisher, :country, :release_date, :authors => [])
