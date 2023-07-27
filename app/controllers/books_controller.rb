@@ -1,4 +1,4 @@
-class BookController < ApplicationController
+class BooksController < ApplicationController
     require 'httparty'
 
     #Req 1 fetch external books via name of a book params
@@ -44,7 +44,7 @@ class BookController < ApplicationController
 
     #Show specific book by id
     def show
-        book = Book.find_by(id: params[:id])
+      book = Book.find_by(id: params[:id])
         if book
           render json: { status_code: 200, status: 'success', data: book }
         else
